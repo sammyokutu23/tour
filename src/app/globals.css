@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+/* ── Brand tokens ─────────────────────────────────────────────── */
+@theme {
+  --color-forest-950: #0b211a;
+  --color-forest-900: #10302a;
+  --color-forest: #163d32;
+  --color-forest-700: #1f5243;
+  --color-forest-600: #2a6a57;
+  --color-forest-100: #dfe9e4;
+  --color-forest-50: #eff5f2;
+
+  --color-gold: #e9b949;
+  --color-gold-600: #c99a2c;
+  --color-gold-100: #fbf0d3;
+
+  --color-terracotta: #d96c43;
+  --color-terracotta-700: #b0512c;
+  --color-terracotta-100: #f8e1d7;
+
+  --color-sand: #f6f1e8;
+  --color-sand-200: #ece4d4;
+  --color-sand-300: #ddd2bd;
+
+  --color-charcoal: #202722;
+  --color-ink-muted: #56605a;
+  --color-ink-subtle: #626c65;
+
+  --font-sans: var(--font-mona), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-mona), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1.25rem;
+  --shadow-card: 0 1px 2px rgb(16 48 42 / 0.06), 0 8px 24px -12px rgb(16 48 42 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(16 48 42 / 0.08), 0 18px 40px -18px rgb(16 48 42 / 0.35);
+
+  --animate-fade-up: fade-up 0.5s ease-out both;
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--color-sand);
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+  letter-spacing: -0.005em;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+h1 {
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+
+/* Visible, consistent focus for keyboard users. */
+:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--color-gold-100);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Restrained glass surface used on the dark dashboard canvas. */
+@utility glass {
+  background: rgb(246 241 232 / 0.1);
+  border: 1px solid rgb(246 241 232 / 0.18);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+}
+
+@utility glass-strong {
+  background: rgb(246 241 232 / 0.88);
+  border: 1px solid rgb(255 255 255 / 0.6);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility skeleton {
+  background: linear-gradient(90deg, var(--color-sand-200) 0%, var(--color-sand) 50%, var(--color-sand-200) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* Leaflet map container sizing */
+.leaflet-container {
+  font-family: var(--font-sans);
+  border-radius: inherit;
+}
