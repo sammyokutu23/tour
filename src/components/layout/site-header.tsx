@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { Bell, Menu, UserRound } from "lucide-react";
 import { Logo } from "./logo";
+import { NavLinks } from "./nav-links";
 import { buttonClass, Container } from "@/components/ui";
 import { getSession, requestDb } from "@/server/auth/session";
 import { unreadNotificationCount } from "@/server/services/community";
@@ -17,35 +18,31 @@ const NAV = [
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-sand-300/60 bg-sand/90 backdrop-blur supports-[backdrop-filter]:bg-sand/75">
-      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-full focus:bg-forest focus:px-4 focus:py-2 focus:text-sand">
+    <header className="sticky top-0 z-40 pt-3">
+      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-full focus:bg-forest focus:px-4 focus:py-2 focus:text-white">
         Skip to content
       </a>
-      <Container className="flex h-16 items-center justify-between gap-4">
-        <Logo />
-        <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
-          {NAV.map((n) => (
-            <Link key={n.href} href={n.href} className="rounded-full px-3.5 py-2 text-sm font-semibold text-ink-muted transition-colors hover:bg-forest-50 hover:text-forest">
-              {n.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="flex items-center gap-2">
-          <span className="hidden sm:block">
-            <Link href="/studio" className={buttonClass("gold", "sm")}>
-              Plan a trip
-            </Link>
-          </span>
+      <Container className="flex items-center justify-between gap-3">
+        <div className="rounded-full border-2 border-forest bg-white py-1 pl-1 pr-4 shadow-[0_4px_0_0_#111]">
+          <Logo />
+        </div>
+        <div className="flex items-center gap-1 rounded-full border-2 border-forest bg-white p-1 shadow-[0_4px_0_0_#111]">
+          <nav aria-label="Main" className="hidden items-center lg:flex">
+            <NavLinks items={NAV} />
+          </nav>
           <Suspense fallback={<div className="h-9 w-20 rounded-full skeleton" aria-hidden />}>
             <UserMenu />
           </Suspense>
+          <Link href="/studio" className={buttonClass("primary", "sm", "hidden h-10 shadow-none sm:inline-flex")}>
+            Plan a trip
+          </Link>
           <details className="group relative lg:hidden">
             <summary className={buttonClass("ghost", "icon", "list-none [&::-webkit-details-marker]:hidden")} aria-label="Open menu">
               <Menu aria-hidden className="h-5 w-5" />
             </summary>
-            <nav aria-label="Mobile" className="absolute right-0 mt-2 w-60 rounded-2xl border border-sand-300 bg-white p-2 shadow-[var(--shadow-lift)]">
+            <nav aria-label="Mobile" className="absolute right-0 mt-3 w-60 rounded-2xl border-2 border-forest bg-white p-2 shadow-[var(--shadow-lift)]">
               {[...NAV, { href: "/studio", label: "Journey Studio" }].map((n) => (
-                <Link key={n.href} href={n.href} className="block rounded-xl px-3 py-2.5 text-sm font-semibold text-charcoal hover:bg-forest-50">
+                <Link key={n.href} href={n.href} className="block rounded-xl px-3 py-2.5 text-sm font-bold text-charcoal hover:bg-gold">
                   {n.label}
                 </Link>
               ))}
@@ -62,11 +59,11 @@ async function UserMenu() {
   if (!session) {
     return (
       <div className="flex items-center gap-1">
-        <Link href="/login" className={buttonClass("ghost", "sm")}>
-          Sign in
+        <Link href="/login" className="rounded-full px-4 py-2.5 text-[0.8rem] font-bold text-ink-muted hover:bg-forest-50 hover:text-forest">
+          Log in
         </Link>
         <span className="hidden md:block">
-          <Link href="/register" className={buttonClass("primary", "sm")}>
+          <Link href="/register" className="rounded-full px-4 py-2.5 text-[0.8rem] font-bold text-ink-muted hover:bg-forest-50 hover:text-forest">
             Join
           </Link>
         </span>
@@ -89,17 +86,17 @@ async function UserMenu() {
     <div className="flex items-center gap-1">
       <Link href="/dashboard/notifications" className={buttonClass("ghost", "icon", "relative")} aria-label={unread ? `${unread} unread notifications` : "Notifications"}>
         <Bell aria-hidden className="h-5 w-5" />
-        {unread > 0 && <span className="absolute right-1.5 top-1.5 h-2.5 w-2.5 rounded-full bg-terracotta ring-2 ring-sand" />}
+        {unread > 0 && <span className="absolute right-1.5 top-1.5 h-2.5 w-2.5 rounded-full bg-gold ring-2 ring-forest" />}
       </Link>
       <details className="relative">
-        <summary className={buttonClass("secondary", "sm", "list-none gap-2 [&::-webkit-details-marker]:hidden")}>
+        <summary className={buttonClass("ghost", "sm", "list-none gap-2 text-[0.8rem] [&::-webkit-details-marker]:hidden")}>
           <UserRound aria-hidden className="h-4 w-4" />
           <span className="max-w-28 truncate">{session.displayName.split(" ")[0]}</span>
         </summary>
-        <div className="absolute right-0 mt-2 w-56 rounded-2xl border border-sand-300 bg-white p-2 shadow-[var(--shadow-lift)]">
+        <div className="absolute right-0 mt-3 w-56 rounded-2xl border-2 border-forest bg-white p-2 shadow-[var(--shadow-lift)]">
           <p className="truncate px-3 py-2 text-xs text-ink-subtle">{session.email}</p>
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className="block rounded-xl px-3 py-2 text-sm font-medium hover:bg-forest-50">
+            <Link key={l.href} href={l.href} className="block rounded-xl px-3 py-2 text-sm font-semibold hover:bg-gold">
               {l.label}
             </Link>
           ))}

@@ -1,7 +1,7 @@
 import { CalendarDays, MapPin, Search, Sparkles, Users } from "lucide-react";
 import { buttonClass, cn } from "@/components/ui";
 
-const fieldCls = "h-12 w-full rounded-xl border border-sand-300 bg-white pl-10 pr-3 text-sm text-charcoal focus:border-forest focus:outline-none focus:ring-2 focus:ring-gold/60";
+const fieldCls = "h-12 w-full rounded-full border-[1.5px] border-forest/20 bg-white pl-10 pr-3 text-sm font-semibold text-charcoal hover:border-forest/50 focus:border-forest focus:outline-none focus:ring-2 focus:ring-gold";
 
 /**
  * Works without JavaScript: a GET form to /experiences, with a second submit button that sends the
@@ -17,7 +17,7 @@ export function SearchBar({
   className?: string;
 }) {
   return (
-    <form action="/experiences" method="get" role="search" aria-label="Search experiences" className={cn("grid gap-3 rounded-[1.5rem] bg-sand p-3 shadow-[var(--shadow-lift)] sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_0.7fr_1fr_auto]", className)}>
+    <form action="/experiences" method="get" role="search" aria-label="Search experiences" className={cn("grid gap-2.5 rounded-[1.4rem] border-2 border-forest bg-white p-2.5 shadow-[var(--shadow-card)] sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_0.7fr_1fr_auto]", className)}>
       <label className="relative">
         <span className="sr-only">Destination</span>
         <MapPin aria-hidden className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-forest" />

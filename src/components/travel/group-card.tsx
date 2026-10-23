@@ -54,7 +54,7 @@ export function GroupCardView({ g, className }: { g: GroupCard; className?: stri
   return (
     <Link
       href={`/travel-together/${g.id}`}
-      className={cn("group flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-sand-300/70 bg-white shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-lift)]", className)}
+      className={cn("group flex flex-col overflow-hidden rounded-[var(--radius-card)] border-2 border-forest bg-white shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-lift)]", className)}
     >
       <div className="relative">
         <GroupCover id={g.id} hasCover={g.hasCover} art={g.coverArt} className="aspect-[16/9]" />

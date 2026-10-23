@@ -1,5 +1,5 @@
 /** Donut ring for small dashboard metrics. `fraction` is 0..1; value/label are shown in the centre. */
-export function Ring({ fraction, value, label, color = "#E9B949" }: { fraction: number; value: string | number; label: string; color?: string }) {
+export function Ring({ fraction, value, label, color = "#F2B11B" }: { fraction: number; value: string | number; label: string; color?: string }) {
   const r = 42;
   const c = 2 * Math.PI * r;
   const f = Math.max(0, Math.min(1, fraction));

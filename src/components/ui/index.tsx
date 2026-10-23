@@ -9,16 +9,16 @@ export function cn(...classes: (string | false | null | undefined)[]) {
 // ───────────────────────────── Buttons ─────────────────────────────
 
 const buttonBase =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-55 whitespace-nowrap";
+  "inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] font-bold tracking-[-0.02em] transition-[background-color,transform,box-shadow] duration-150 active:translate-y-[2px] active:shadow-none disabled:cursor-not-allowed disabled:opacity-55 whitespace-nowrap";
 
 export const buttonVariants = {
-  primary: "bg-forest text-sand hover:bg-forest-700 active:bg-forest-900",
-  gold: "bg-gold text-forest-950 hover:bg-gold-600",
-  secondary: "border border-forest/20 bg-white text-forest hover:border-forest/40 hover:bg-forest-50",
-  ghost: "text-forest hover:bg-forest-50",
-  danger: "bg-terracotta-700 text-white hover:bg-[#953f20]",
-  light: "bg-sand text-forest hover:bg-white",
-  outlineLight: "border border-sand/40 text-sand hover:bg-sand/10",
+  primary: "border-forest bg-forest text-white shadow-[var(--shadow-press)] hover:bg-forest-700",
+  gold: "border-forest bg-gold text-forest shadow-[var(--shadow-press)] hover:bg-gold-600",
+  secondary: "border-forest bg-white text-forest shadow-[var(--shadow-press)] hover:bg-gold-100",
+  ghost: "border-transparent text-forest hover:bg-forest-50",
+  danger: "border-forest bg-terracotta-700 text-white shadow-[var(--shadow-press)] hover:bg-[#99300f]",
+  light: "border-forest bg-white text-forest hover:bg-gold",
+  outlineLight: "border-white/70 text-white hover:bg-white/10",
 } as const;
 
 export const buttonSizes = {
@@ -75,8 +75,8 @@ export function PageHeader({
   return (
     <div className={cn("flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between", className)}>
       <div className="max-w-3xl">
-        {eyebrow && <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-terracotta-700">{eyebrow}</p>}
-        <h1 className="text-balance text-3xl font-bold text-forest sm:text-4xl">{title}</h1>
+        {eyebrow && <p className="pill-label mb-4 text-forest">{eyebrow}</p>}
+        <h1 className="text-balance text-4xl text-forest sm:text-5xl">{title}</h1>
         {description && <p className="mt-3 text-base leading-relaxed text-ink-muted">{description}</p>}
       </div>
       {actions && <div className="flex flex-wrap gap-2">{actions}</div>}
@@ -86,10 +86,10 @@ export function PageHeader({
 
 export function SectionHeading({ eyebrow, title, description, action }: { eyebrow?: string; title: string; description?: string; action?: ReactNode }) {
   return (
-    <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+    <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div className="max-w-2xl">
-        {eyebrow && <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-terracotta-700">{eyebrow}</p>}
-        <h2 className="text-balance text-3xl font-bold text-forest sm:text-[2.5rem] sm:leading-[1.1]">{title}</h2>
+        {eyebrow && <p className="pill-label mb-4 text-forest">{eyebrow}</p>}
+        <h2 className="text-balance text-4xl text-forest sm:text-[3.4rem] sm:leading-[1]">{title}</h2>
         {description && <p className="mt-3 text-base leading-relaxed text-ink-muted">{description}</p>}
       </div>
       {action}
@@ -98,27 +98,27 @@ export function SectionHeading({ eyebrow, title, description, action }: { eyebro
 }
 
 export function Card({ className, ...props }: ComponentProps<"div">) {
-  return <div className={cn("rounded-[var(--radius-card)] border border-sand-300/70 bg-white shadow-[var(--shadow-card)]", className)} {...props} />;
+  return <div className={cn("rounded-[var(--radius-card)] border-2 border-forest bg-white shadow-[var(--shadow-card)]", className)} {...props} />;
 }
 
 // ───────────────────────────── Feedback ─────────────────────────────
 
 const badgeTones = {
-  neutral: "bg-sand-200 text-charcoal",
-  forest: "bg-forest-100 text-forest",
-  gold: "bg-gold-100 text-[#7a5a0e]",
-  terracotta: "bg-terracotta-100 text-terracotta-700",
-  danger: "bg-[#fbe3de] text-[#9b2c1a]",
-  success: "bg-[#dcefe3] text-[#1d5b39]",
-  info: "bg-[#e1ecf5] text-[#1f4a6e]",
-  dark: "bg-forest text-sand",
+  neutral: "border-sand-300 bg-sand-200 text-charcoal",
+  forest: "border-forest bg-white text-forest",
+  gold: "border-forest bg-gold text-forest",
+  terracotta: "border-transparent bg-terracotta-100 text-terracotta-700",
+  danger: "border-transparent bg-[#fbe3de] text-[#9b2c1a]",
+  success: "border-transparent bg-[#dcefe3] text-[#1d5b39]",
+  info: "border-transparent bg-[#e1ecf5] text-[#1f4a6e]",
+  dark: "border-forest bg-forest text-white",
 } as const;
 export type BadgeTone = keyof typeof badgeTones;
 
 export function Badge({ tone = "neutral", className, ...props }: ComponentProps<"span"> & { tone?: BadgeTone }) {
   return (
     <span
-      className={cn("inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold leading-5", badgeTones[tone], className)}
+      className={cn("inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-bold leading-5", badgeTones[tone], className)}
       {...props}
     />
   );
@@ -155,8 +155,8 @@ export function Alert({ tone = "info", title, children, className }: { tone?: ke
 
 export function EmptyState({ icon, title, description, action, className }: { icon?: ReactNode; title: string; description?: ReactNode; action?: ReactNode; className?: string }) {
   return (
-    <div className={cn("flex flex-col items-center rounded-[var(--radius-card)] border border-dashed border-sand-300 bg-white/60 px-6 py-12 text-center", className)}>
-      {icon && <div className="mb-4 rounded-full bg-forest-50 p-3 text-forest">{icon}</div>}
+    <div className={cn("flex flex-col items-center rounded-[var(--radius-card)] border-2 border-dashed border-forest/40 bg-white px-6 py-12 text-center", className)}>
+      {icon && <div className="mb-4 rounded-full border-2 border-forest bg-gold p-3 text-forest">{icon}</div>}
       <p className="font-display text-xl font-bold text-forest">{title}</p>
       {description && <div className="mt-2 max-w-md text-sm leading-relaxed text-ink-muted">{description}</div>}
       {action && <div className="mt-6">{action}</div>}
@@ -205,7 +205,7 @@ export function PageSkeleton() {
 // ───────────────────────────── Forms ─────────────────────────────
 
 const fieldBase =
-  "w-full rounded-xl border border-sand-300 bg-white px-3.5 text-sm text-charcoal placeholder:text-ink-subtle/70 transition-colors focus:border-forest focus:outline-none focus:ring-2 focus:ring-gold/60 disabled:bg-sand-200 aria-[invalid=true]:border-terracotta-700";
+  "w-full rounded-xl border-[1.5px] border-forest/25 bg-white px-3.5 text-sm text-charcoal placeholder:text-ink-subtle/70 transition-colors focus:border-forest focus:outline-none focus:ring-2 focus:ring-gold disabled:bg-sand-200 aria-[invalid=true]:border-terracotta-700";
 
 export function Input({ className, ...props }: ComponentProps<"input">) {
   return <input className={cn(fieldBase, "h-11", className)} {...props} />;
@@ -269,7 +269,7 @@ export function Stat({ label, value, hint, className }: { label: string; value: 
   return (
     <Card className={cn("p-5", className)}>
       <p className="text-xs font-semibold uppercase tracking-wider text-ink-subtle">{label}</p>
-      <p className="mt-2 font-display text-3xl font-bold text-forest">{value}</p>
+      <p className="mt-2 font-display text-3xl font-extrabold tracking-[-0.05em] text-forest">{value}</p>
       {hint && <p className="mt-1 text-xs text-ink-subtle">{hint}</p>}
     </Card>
   );
@@ -290,7 +290,7 @@ export function DefinitionList({ items, className }: { items: { term: ReactNode;
 
 export function Table({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={cn("overflow-x-auto rounded-2xl border border-sand-300/70 bg-white", className)}>
+    <div className={cn("overflow-x-auto rounded-2xl border-2 border-forest bg-white", className)}>
       <table className="w-full min-w-[640px] text-left text-sm">{children}</table>
     </div>
   );
@@ -335,7 +335,7 @@ export function Pagination({ page, pageCount, hrefFor }: { page: number; pageCou
 
 export function TabNav({ tabs, current }: { tabs: { href: string; label: string; key: string; count?: number }[]; current: string }) {
   return (
-    <nav aria-label="Sections" className="flex gap-1 overflow-x-auto rounded-full border border-sand-300/70 bg-white p-1">
+    <nav aria-label="Sections" className="flex gap-1 overflow-x-auto rounded-full border-2 border-forest bg-white p-1 shadow-[0_4px_0_0_#111]">
       {tabs.map((t) => (
         <Link
           key={t.key}
@@ -343,7 +343,7 @@ export function TabNav({ tabs, current }: { tabs: { href: string; label: string;
           aria-current={t.key === current ? "page" : undefined}
           className={cn(
             "whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition-colors",
-            t.key === current ? "bg-forest text-sand" : "text-ink-muted hover:bg-forest-50 hover:text-forest",
+            t.key === current ? "bg-gold text-forest" : "text-ink-muted hover:bg-forest-50 hover:text-forest",
           )}
         >
           {t.label}

@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Mona_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { appUrl, brand } from "@/config/brand";
 import "./globals.css";
 
-// Mona Sans (SIL Open Font License) for both headings and body, in the spirit of the reference design.
-const monaSans = Mona_Sans({ subsets: ["latin"], variable: "--font-mona", display: "swap" });
+// Inter (SIL Open Font License) for headings and body; headlines use very heavy, tightly tracked weights.
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(appUrl()),
@@ -17,14 +17,14 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#163D32",
+  themeColor: "#111111",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={monaSans.variable}>
+    <html lang="en" className={inter.variable}>
       <body className="min-h-dvh antialiased">
         <SiteHeader />
         <main id="main">{children}</main>

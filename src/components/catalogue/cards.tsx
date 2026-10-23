@@ -44,21 +44,21 @@ export function DestinationCardView({ d, className }: { d: DCard; className?: st
   return (
     <Link
       href={`/destinations/${d.slug}`}
-      className={cn("group flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-sand-300/70 bg-white shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-lift)]", className)}
+      className={cn("group flex flex-col overflow-hidden rounded-[var(--radius-card)] border-2 border-forest bg-white shadow-[var(--shadow-card)] transition-[box-shadow,transform] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)]", className)}
     >
-      <Cover media={d.media} variant={d.artVariant} seed={d.slug} className="aspect-[4/3]" />
+      <Cover media={d.media} variant={d.artVariant} seed={d.slug} className="aspect-[4/3] border-b-2 border-forest" />
       <div className="flex flex-1 flex-col gap-2 p-5">
-        <p className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-terracotta-700">
+        <p className="flex items-center gap-1 text-[0.7rem] font-extrabold uppercase tracking-[0.08em] text-ink-subtle">
           <MapPin aria-hidden className="h-3.5 w-3.5" />
           {d.region}
           {d.county ? ` · ${d.county}` : ""}
         </p>
-        <h3 className="text-xl font-bold text-forest">{d.name}</h3>
+        <h3 className="text-2xl text-forest">{d.name}</h3>
         <p className="line-clamp-2 text-sm leading-relaxed text-ink-muted">{d.summary}</p>
         <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1 pt-3 text-xs font-medium text-ink-subtle">
           <span>{d.experienceCount} experience{d.experienceCount === 1 ? "" : "s"}</span>
           <span>{d.guideCount} guide{d.guideCount === 1 ? "" : "s"}</span>
-          {d.fromPriceMinor !== null && <span className="ml-auto text-sm font-semibold text-forest">from {formatMoney(d.fromPriceMinor)}</span>}
+          {d.fromPriceMinor !== null && <span className="ml-auto rounded-full bg-gold px-2.5 py-0.5 text-sm font-extrabold text-forest">from {formatMoney(d.fromPriceMinor)}</span>}
         </div>
       </div>
     </Link>
@@ -69,10 +69,10 @@ export function ExperienceCardView({ e, className }: { e: ECard; className?: str
   return (
     <Link
       href={`/experiences/${e.slug}`}
-      className={cn("group flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-sand-300/70 bg-white shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-lift)]", className)}
+      className={cn("group flex flex-col overflow-hidden rounded-[var(--radius-card)] border-2 border-forest bg-white shadow-[var(--shadow-card)] transition-[box-shadow,transform] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)]", className)}
     >
       <div className="relative">
-        <Cover media={e.media} variant={e.destination.artVariant} seed={e.slug} className="aspect-[16/10]" />
+        <Cover media={e.media} variant={e.destination.artVariant} seed={e.slug} className="aspect-[16/10] border-b-2 border-forest" />
         <div className="absolute left-3 top-3 flex gap-1.5">
           <Badge tone="dark">{e.category.name}</Badge>
           {e.isDemo && <DemoBadge />}
@@ -80,7 +80,7 @@ export function ExperienceCardView({ e, className }: { e: ECard; className?: str
         {(() => {
           const Icon = CATEGORY_ICON[e.category.slug] ?? Compass;
           return (
-            <span aria-hidden className="absolute bottom-3 right-3 flex h-10 w-10 items-center justify-center rounded-full bg-sand/90 text-forest shadow-sm">
+            <span aria-hidden className="absolute bottom-3 right-3 flex h-10 w-10 items-center justify-center rounded-full border-2 border-forest bg-gold text-forest">
               <Icon className="h-5 w-5" />
             </span>
           );
@@ -91,7 +91,7 @@ export function ExperienceCardView({ e, className }: { e: ECard; className?: str
           <MapPin aria-hidden className="h-3.5 w-3.5" />
           {e.destination.name}
         </p>
-        <h3 className="text-lg font-bold leading-snug text-forest">{e.title}</h3>
+        <h3 className="text-xl leading-[1.1] text-forest">{e.title}</h3>
         <p className="line-clamp-2 text-sm leading-relaxed text-ink-muted">{e.summary}</p>
         <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-ink-subtle">
           <span className="inline-flex items-center gap-1">
@@ -107,7 +107,7 @@ export function ExperienceCardView({ e, className }: { e: ECard; className?: str
           <Rating avg={e.ratingAvg} count={e.reviewCount} />
           <p className="text-right">
             <span className="block text-[11px] uppercase tracking-wider text-ink-subtle">{e.pricingModel === "per_group" ? "per group" : "per person"}</span>
-            <span className="font-display text-lg font-bold text-forest">{formatMoney(e.basePriceMinor, e.currency)}</span>
+            <span className="font-display text-lg font-extrabold tracking-[-0.04em] text-forest">{formatMoney(e.basePriceMinor, e.currency)}</span>
           </p>
         </div>
       </div>
@@ -127,7 +127,7 @@ export function GuideAvatar({ name, photoUrl, className }: { name: string; photo
     return <img src={photoUrl} alt="" referrerPolicy="no-referrer" className={cn("rounded-full object-cover", className)} />;
   }
   return (
-    <div aria-hidden className={cn("flex items-center justify-center rounded-full bg-forest font-display font-semibold text-gold", className)}>
+    <div aria-hidden className={cn("flex items-center justify-center rounded-full border-2 border-forest bg-gold font-display font-extrabold text-forest", className)}>
       {initials}
     </div>
   );
@@ -152,7 +152,7 @@ export function GuideCardView({ g, query, className }: { g: GCard; query?: strin
   return (
     <Link
       href={`/guides/${g.slug}${query ? `?${query}` : ""}`}
-      className={cn("group flex flex-col rounded-[var(--radius-card)] border border-sand-300/70 bg-white p-5 shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-lift)]", className)}
+      className={cn("group flex flex-col rounded-[var(--radius-card)] border-2 border-forest bg-white p-5 shadow-[var(--shadow-card)] transition-[box-shadow,transform] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)]", className)}
     >
       <div className="flex items-start gap-4">
         <GuideAvatar name={g.name} photoUrl={g.photoUrl} className="h-16 w-16 text-xl" />
@@ -161,7 +161,7 @@ export function GuideCardView({ g, query, className }: { g: GCard; query?: strin
             <VerificationBadge verified={g.verified} isDemo={g.isDemo} />
             {g.isDemo && <DemoBadge />}
           </div>
-          <h3 className="mt-1.5 text-lg font-bold text-forest">{g.name}</h3>
+          <h3 className="mt-1.5 text-xl text-forest">{g.name}</h3>
           {g.headline && <p className="line-clamp-2 text-sm text-ink-muted">{g.headline}</p>}
         </div>
       </div>
@@ -194,7 +194,7 @@ export function GuideCardView({ g, query, className }: { g: GCard; query?: strin
         {g.fromPriceMinor !== null && (
           <p className="text-right">
             <span className="block text-[11px] uppercase tracking-wider text-ink-subtle">from</span>
-            <span className="font-display text-lg font-bold text-forest">{formatMoney(g.fromPriceMinor, g.currency)}</span>
+            <span className="font-display text-lg font-extrabold tracking-[-0.04em] text-forest">{formatMoney(g.fromPriceMinor, g.currency)}</span>
           </p>
         )}
       </div>

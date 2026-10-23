@@ -5,10 +5,10 @@ import { cn } from "@/components/ui";
 export function LogoMark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 40 40" className={cn("h-9 w-9", className)} aria-hidden>
-      <rect width="40" height="40" rx="12" fill="#163D32" />
-      <circle cx="26" cy="15" r="6" fill="#E9B949" />
-      <path d="M6 29 C 12 23, 18 26, 22 22 C 26 18, 31 21, 34 19 L34 34 L6 34 Z" fill="#D96C43" />
-      <path d="M6 31 C 14 27, 22 31, 34 27 L34 34 L6 34 Z" fill="#F6F1E8" opacity="0.92" />
+      <rect width="40" height="40" rx="11" fill="#111111" />
+      <circle cx="27" cy="14" r="6" fill="#F2B11B" />
+      <path d="M19 30 L19.8 20.5 L20.6 30 Z M8 20.5 C 12 18.5, 28 18.5, 32 20.5 C 28 21.8, 12 21.8, 8 20.5 Z" fill="#FFFFFF" />
+      <path d="M5 34 C 13 29, 27 29, 35 34 Z" fill="#FFFFFF" />
     </svg>
   );
 }
@@ -17,7 +17,7 @@ export function Logo({ tone = "dark", className }: { tone?: "dark" | "light"; cl
   return (
     <Link href="/" className={cn("flex items-center gap-2.5", className)} aria-label={`${brand.name} home`}>
       <LogoMark />
-      <span className={cn("hidden font-display text-lg font-bold leading-none tracking-tight sm:inline", tone === "dark" ? "text-forest" : "text-sand")}>
+      <span className={cn("hidden font-display text-[1.05rem] font-extrabold leading-none tracking-[-0.045em] sm:inline", tone === "dark" ? "text-forest" : "text-white")}>
         {brand.name}
       </span>
     </Link>

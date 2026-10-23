@@ -25,7 +25,7 @@ export function ReportForm({
       <summary className="inline-flex cursor-pointer list-none items-center gap-1 text-xs font-semibold text-terracotta-700 hover:underline [&::-webkit-details-marker]:hidden">
         <Flag aria-hidden className="h-3.5 w-3.5" /> {label}
       </summary>
-      <div className="mt-3 w-full min-w-72 max-w-md rounded-2xl border border-sand-300 bg-white p-4 text-left shadow-[var(--shadow-lift)]">
+      <div className="mt-3 w-full min-w-72 max-w-md rounded-2xl border-2 border-forest bg-white p-4 text-left shadow-[var(--shadow-lift)]">
         <ActionForm action={reportAction} resetOnSuccess className="space-y-3">
           {groupId && <input type="hidden" name="groupId" value={groupId} />}
           {reportedUserId && <input type="hidden" name="reportedUserId" value={reportedUserId} />}

@@ -1,37 +1,40 @@
 @import "tailwindcss";
 
 /* ── Brand tokens ─────────────────────────────────────────────── */
+/* Neo-brutalist palette: ink black, signal yellow, white canvas. Token names are kept from the
+   original palette so every page picks up the new look without renaming classes. */
 @theme {
-  --color-forest-950: #0b211a;
-  --color-forest-900: #10302a;
-  --color-forest: #163d32;
-  --color-forest-700: #1f5243;
-  --color-forest-600: #2a6a57;
-  --color-forest-100: #dfe9e4;
-  --color-forest-50: #eff5f2;
+  --color-forest-950: #050505;
+  --color-forest-900: #0d0d0d;
+  --color-forest: #111111;
+  --color-forest-700: #262626;
+  --color-forest-600: #3a3a3a;
+  --color-forest-100: #ebebeb;
+  --color-forest-50: #f4f4f4;
 
-  --color-gold: #e9b949;
-  --color-gold-600: #c99a2c;
-  --color-gold-100: #fbf0d3;
+  --color-gold: #f2b11b;
+  --color-gold-600: #dc9c05;
+  --color-gold-100: #fdf0cc;
 
-  --color-terracotta: #d96c43;
-  --color-terracotta-700: #b0512c;
-  --color-terracotta-100: #f8e1d7;
+  --color-terracotta: #e0532f;
+  --color-terracotta-700: #b8391a;
+  --color-terracotta-100: #fbe2d9;
 
-  --color-sand: #f6f1e8;
-  --color-sand-200: #ece4d4;
-  --color-sand-300: #ddd2bd;
+  --color-sand: #f6f6f3;
+  --color-sand-200: #ededea;
+  --color-sand-300: #dcdcd8;
 
-  --color-charcoal: #202722;
-  --color-ink-muted: #56605a;
-  --color-ink-subtle: #626c65;
+  --color-charcoal: #111111;
+  --color-ink-muted: #4f4f4f;
+  --color-ink-subtle: #666666;
 
-  --font-sans: var(--font-mona), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-mona), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  --radius-card: 1.25rem;
-  --shadow-card: 0 1px 2px rgb(16 48 42 / 0.06), 0 8px 24px -12px rgb(16 48 42 / 0.18);
-  --shadow-lift: 0 2px 4px rgb(16 48 42 / 0.08), 0 18px 40px -18px rgb(16 48 42 / 0.35);
+  --radius-card: 1.15rem;
+  --shadow-card: 4px 4px 0 0 #111111;
+  --shadow-lift: 7px 7px 0 0 #111111;
+  --shadow-press: 0 5px 0 0 rgb(46 46 46 / 0.22);
 
   --animate-fade-up: fade-up 0.5s ease-out both;
   @keyframes fade-up {
@@ -56,10 +59,12 @@ html {
 }
 
 body {
-  background: var(--color-sand);
+  background-color: #ffffff;
+  background-image: radial-gradient(rgb(17 17 17 / 0.11) 1px, transparent 1.2px);
+  background-size: 22px 22px;
   color: var(--color-charcoal);
   font-family: var(--font-sans);
-  letter-spacing: -0.005em;
+  letter-spacing: -0.01em;
 }
 
 h1,
@@ -67,14 +72,14 @@ h2,
 h3,
 .font-display {
   font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
+  font-weight: 750;
+  letter-spacing: -0.05em;
+  line-height: 1.02;
 }
 
 h1 {
-  font-weight: 800;
-  letter-spacing: -0.045em;
+  font-weight: 850;
+  letter-spacing: -0.055em;
 }
 
 /* Visible, consistent focus for keyboard users. */
@@ -85,7 +90,8 @@ h1 {
 }
 
 ::selection {
-  background: var(--color-gold-100);
+  background: var(--color-gold);
+  color: var(--color-forest);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -111,6 +117,53 @@ h1 {
   border: 1px solid rgb(255 255 255 / 0.6);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
+}
+
+/* Solid ink box behind a headline word, as in "The [easiest] way". */
+@utility highlight {
+  display: inline-block;
+  background: var(--color-forest);
+  color: #ffffff;
+  border-radius: 0.18em;
+  padding: 0 0.14em 0.04em;
+  line-height: 1.08;
+}
+
+@utility highlight-gold {
+  display: inline-block;
+  background: var(--color-gold);
+  color: var(--color-forest);
+  border-radius: 0.18em;
+  padding: 0 0.14em 0.04em;
+  line-height: 1.08;
+}
+
+/* Outlined pill eyebrow label ("HOW IT WORKS"). */
+@utility pill-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* Hard-shadow surface: thick ink border with an offset block shadow. */
+@utility brutal {
+  background: #ffffff;
+  border: 2px solid var(--color-forest);
+  box-shadow: var(--shadow-card);
+}
+
+@utility dots-dark {
+  background-color: var(--color-forest-950);
+  background-image: radial-gradient(rgb(255 255 255 / 0.08) 1px, transparent 1.2px);
+  background-size: 22px 22px;
 }
 
 @utility text-balance {

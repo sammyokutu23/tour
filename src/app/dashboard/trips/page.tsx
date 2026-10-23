@@ -40,7 +40,7 @@ async function List() {
           <h2 className="mb-3 text-lg font-bold text-forest">{g.title}</h2>
           <div className="grid gap-4 md:grid-cols-2">
             {g.items.map((t) => (
-              <Link key={t.id} href={`/studio/${t.id}`} className="flex gap-4 rounded-2xl border border-sand-300/70 bg-white p-3 transition-shadow hover:shadow-[var(--shadow-card)]">
+              <Link key={t.id} href={`/studio/${t.id}`} className="flex gap-4 rounded-2xl border-2 border-forest bg-white p-3 transition-shadow hover:shadow-[var(--shadow-card)]">
                 <div className="h-24 w-28 shrink-0 overflow-hidden rounded-xl"><DestinationArt variant={t.art_variant ?? "savanna"} seed={t.id} /></div>
                 <div className="min-w-0 py-1">
                   <Badge tone={t.status === "confirmed" ? "success" : t.status === "draft" ? "neutral" : "gold"}>{TRIP_STATUS_LABEL[t.status]}</Badge>

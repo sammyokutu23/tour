@@ -65,7 +65,7 @@ async function Overview() {
           <ul className="space-y-3">
             {requests.slice(0, 5).map((b) => (
               <li key={b.id}>
-                <Link href={`/provider/bookings/${b.id}`} className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-gold/60 bg-white p-4 hover:shadow-[var(--shadow-card)]">
+                <Link href={`/provider/bookings/${b.id}`} className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border-2 border-forest bg-white p-4 hover:shadow-[var(--shadow-card)]">
                   <div>
                     <p className="font-semibold text-forest">{b.item_titles.join(" · ")}</p>
                     <p className="text-sm text-ink-muted">{formatDate(b.first_start, { weekday: "short", day: "numeric", month: "short" })} at {formatTime(b.first_start)} · {b.traveller_first_name}, party of {b.party}</p>

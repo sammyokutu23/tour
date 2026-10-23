@@ -57,23 +57,23 @@ export function TripMap({
             attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
           }).addTo(map);
         }
-        const colors: Record<string, string> = { destination: "#163D32", experience: "#D96C43", meeting: "#D96C43", guide: "#C99A2C" };
+        const colors: Record<string, string> = { destination: "#111111", experience: "#F2B11B", meeting: "#F2B11B", guide: "#FFFFFF" };
         const points: [number, number][] = [];
         for (const m of markers) {
           const color = colors[m.kind ?? "destination"];
           const icon = L.divIcon({
             className: "",
-            html: `<div style="background:${color};color:#F6F1E8;border:2px solid #F6F1E8;box-shadow:0 2px 6px rgba(0,0,0,.3);width:28px;height:28px;border-radius:9999px;display:flex;align-items:center;justify-content:center;font:700 12px/1 system-ui">${m.order ?? ""}</div>`,
+            html: `<div style="background:${color};color:${color === "#111111" ? "#FFFFFF" : "#111111"};border:2px solid #111111;box-shadow:2px 2px 0 #111111;width:28px;height:28px;border-radius:9999px;display:flex;align-items:center;justify-content:center;font:700 12px/1 system-ui">${m.order ?? ""}</div>`,
             iconSize: [28, 28],
             iconAnchor: [14, 14],
           });
           const marker = L.marker([m.lat, m.lng], { icon, title: m.label, alt: m.label, keyboard: true }).addTo(map);
           const safe = m.label.replace(/[<>&"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;" })[c]!);
-          marker.bindPopup(m.href ? `<a href="${encodeURI(m.href)}" style="font-weight:600;color:#163D32">${safe}</a>` : `<strong>${safe}</strong>`);
+          marker.bindPopup(m.href ? `<a href="${encodeURI(m.href)}" style="font-weight:600;color:#111111">${safe}</a>` : `<strong>${safe}</strong>`);
           points.push([m.lat, m.lng]);
         }
         if (connect && points.length > 1) {
-          L.polyline(points, { color: "#163D32", weight: 2.5, dashArray: "6 8", opacity: 0.8 }).addTo(map);
+          L.polyline(points, { color: "#111111", weight: 2.5, dashArray: "6 8", opacity: 0.8 }).addTo(map);
         }
         if (points.length === 1) map.setView(points[0], zoom ?? 10);
         else if (points.length > 1) map.fitBounds(L.latLngBounds(points), { padding: [36, 36], maxZoom: zoom ?? 12 });

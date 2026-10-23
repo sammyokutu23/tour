@@ -166,7 +166,7 @@ function ExperienceRow({ e, tripId, editable, party, compact }: { e: PanelExperi
   const usable = e.slots.filter((s) => s.dayNumber !== null && (e.perGroup || s.remaining >= party));
   const tooBig = e.perGroup && party > e.maxGroupSize;
   return (
-    <details className="group rounded-2xl border border-sand-300/70 bg-white p-3 open:shadow-[var(--shadow-card)]">
+    <details className="group rounded-2xl border-2 border-forest bg-white p-3 open:shadow-[var(--shadow-card)]">
       <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
         <div className="flex justify-between gap-2">
           <div className="min-w-0">

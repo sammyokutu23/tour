@@ -27,7 +27,7 @@ async function List() {
     <ul className="space-y-3">
       {cases.map((c) => (
         <li key={c.id}>
-          <Link href={`/dashboard/support/${c.id}`} className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-sand-300/70 bg-white p-4 hover:shadow-[var(--shadow-card)]">
+          <Link href={`/dashboard/support/${c.id}`} className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border-2 border-forest bg-white p-4 hover:shadow-[var(--shadow-card)]">
             <div>
               <p className="font-mono text-xs text-ink-subtle">{c.reference}</p>
               <p className="font-semibold text-forest">{c.subject}</p>

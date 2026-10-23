@@ -53,7 +53,7 @@ export default function StudioLanding() {
           <h2 className="mb-6 text-2xl font-bold text-forest">Or start from a route</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {journeys.map((j) => (
-              <Link key={j.slug} href={`/studio/new?journey=${j.slug}`} className="group overflow-hidden rounded-2xl border border-sand-300/70 bg-white transition-shadow hover:shadow-[var(--shadow-lift)]">
+              <Link key={j.slug} href={`/studio/new?journey=${j.slug}`} className="group overflow-hidden rounded-2xl border-2 border-forest bg-white transition-shadow hover:shadow-[var(--shadow-lift)]">
                 <div className="aspect-[16/9]"><DestinationArt variant={j.art} seed={j.slug} /></div>
                 <div className="p-4">
                   <p className="text-xs font-semibold text-terracotta-700">{j.length} days</p>

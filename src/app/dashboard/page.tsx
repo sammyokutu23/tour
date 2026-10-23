@@ -180,8 +180,8 @@ async function Overview({ searchParams }: { searchParams: SP }) {
             <section aria-label="Your stats" className="glass rounded-[1.4rem] p-5">
               <div className="grid grid-cols-3 gap-2">
                 <Ring fraction={Math.min(1, trips.length / 5)} value={trips.length} label="Trips planned" />
-                <Ring fraction={Math.min(1, destinationsPlanned / 12)} value={destinationsPlanned} label="Destinations" color="#D96C43" />
-                <Ring fraction={Math.min(1, bookedDays / 30)} value={bookedDays} label="Days booked" color="#DFE9E4" />
+                <Ring fraction={Math.min(1, destinationsPlanned / 12)} value={destinationsPlanned} label="Destinations" color="#FFFFFF" />
+                <Ring fraction={Math.min(1, bookedDays / 30)} value={bookedDays} label="Days booked" color="#9A9A9A" />
               </div>
               {next && (
                 <div className="mt-5">
@@ -190,7 +190,7 @@ async function Overview({ searchParams }: { searchParams: SP }) {
                     <span className="rounded-full bg-sand px-2 py-0.5 text-xs font-bold text-forest">{Math.round(readiness * 100)}%</span>
                   </div>
                   <div className="h-3 overflow-hidden rounded-full bg-sand/20" role="meter" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(readiness * 100)} aria-label="Days with plans">
-                    <div className="h-full rounded-full bg-[repeating-linear-gradient(135deg,#F6F1E8_0_6px,#DDD2BD_6px_12px)]" style={{ width: `${Math.round(readiness * 100)}%` }} />
+                    <div className="h-full rounded-full bg-[repeating-linear-gradient(135deg,#F2B11B_0_6px,#DC9C05_6px_12px)]" style={{ width: `${Math.round(readiness * 100)}%` }} />
                   </div>
                 </div>
               )}
@@ -204,7 +204,7 @@ async function Overview({ searchParams }: { searchParams: SP }) {
           <h2 className="mb-3 text-xl font-bold text-forest">Other upcoming trips</h2>
           <div className="grid gap-3 md:grid-cols-2">
             {upcoming.filter((t) => t.id !== next?.id).map((t) => (
-              <Link key={t.id} href={`/studio/${t.id}`} className="flex items-center justify-between rounded-2xl border border-sand-300 bg-white px-4 py-3 hover:shadow-[var(--shadow-card)]">
+              <Link key={t.id} href={`/studio/${t.id}`} className="flex items-center justify-between rounded-2xl border-2 border-forest bg-white px-4 py-3 hover:shadow-[var(--shadow-card)]">
                 <span><span className="font-semibold text-forest">{t.title}</span><span className="block text-xs text-ink-subtle">{formatDate(t.start_date)} – {formatDate(t.end_date)}</span></span>
                 <Badge tone={t.status === "draft" ? "neutral" : "gold"}>{TRIP_STATUS_LABEL[t.status]}</Badge>
               </Link>

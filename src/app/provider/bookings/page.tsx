@@ -33,7 +33,7 @@ async function List({ searchParams }: { searchParams: SP }) {
         <ul className="space-y-3">
           {rows.map((b) => (
             <li key={b.id}>
-              <Link href={`/provider/bookings/${b.id}`} className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-sand-300/70 bg-white p-4 hover:shadow-[var(--shadow-card)]">
+              <Link href={`/provider/bookings/${b.id}`} className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border-2 border-forest bg-white p-4 hover:shadow-[var(--shadow-card)]">
                 <div>
                   <p className="font-mono text-xs text-ink-subtle">{b.reference}</p>
                   <p className="font-semibold text-forest">{b.item_titles.join(" · ")}</p>
